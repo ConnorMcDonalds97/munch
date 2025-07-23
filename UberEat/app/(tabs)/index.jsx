@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Pressable} from 'react-native'
 import React from 'react'
 import { Link } from "expo-router"
 
-const app = () => {
+const App = () => {
   return (
     <View style = {styles.container}>
       {/*title*/}
@@ -19,7 +19,7 @@ const app = () => {
   )
 }
 
-export default app
+export default App
 
 const styles = StyleSheet.create({
   container: {
