@@ -6,7 +6,7 @@ const app = () => {
   return (
     <View style = {styles.container}>
       {/*title*/}
-      <Text style={styles.title}>UberEat</Text>  
+      <Text style={styles.title}>munch</Text>  
 
       {/*"click here" button*/}
       <Link href="/explore" asChild> 
