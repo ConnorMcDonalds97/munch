@@ -6,7 +6,7 @@ const App = () => {
   return (
     <View style = {styles.container}>
       {/*title*/}
-      <Text style={styles.title}>munch</Text>  
+      <Text style={styles.title}>solo</Text>  
 
       {/*"click here" button*/}
       <Link href="/tempPage" asChild> 

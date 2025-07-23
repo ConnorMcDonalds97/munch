@@ -2,7 +2,9 @@ import React from 'react';
 import { createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs'
 
 import HomeScreen from './index'
-import ExploreScreen from './explore'
+import SoloScreen from './solo'
+import RoomScreen from './room'
+import SettingsScreen from './settings'
 
 const TopTab = createMaterialTopTabNavigator()
 
@@ -17,7 +19,9 @@ export default function SwipeTabs(){
     }}
     >
       <TopTab.Screen name="Home" component={HomeScreen}/>
-      <TopTab.Screen name="Explore" component={ExploreScreen}/>
+      <TopTab.Screen name="Solo" component={SoloScreen}/>
+      <TopTab.Screen name="Room" component={RoomScreen}/>
+      <TopTab.Screen name="Settings" component={SettingsScreen}/>
 
 
     </TopTab.Navigator>

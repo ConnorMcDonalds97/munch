@@ -6,15 +6,7 @@ const App = () => {
   return (
     <View style = {styles.container}>
       {/*title*/}
-      <Text style={styles.title}>munch</Text>  
-
-      {/*"click here" button*/}
-      <Link href="/tempPage" asChild> 
-        <Pressable style={styles.button}>
-          <Text styles={styles.buttonText}>Click Here!</Text>
-        </Pressable>
-      </Link>
-
+      <Text style={styles.title}>if you're reading this, the button worked.</Text>  
     </View>
   )
 }
