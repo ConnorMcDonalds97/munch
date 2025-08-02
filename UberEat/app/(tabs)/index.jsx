@@ -1,10 +1,16 @@
-import { View, Text, StyleSheet, Pressable} from 'react-native'
+import { View, Text, StyleSheet, Pressable, Image} from 'react-native'
 import React from 'react'
 import { Link } from "expo-router"
+import munchLogo from "@/assets/images/munchLogoWhite.png"
 
 const App = () => {
   return (
     <View style = {styles.container}>
+      <Image
+        style={styles.logo}
+        source={munchLogo}
+      ></Image>
+
       {/*title*/}
       <Text style={styles.title}>munch</Text>  
 
@@ -27,13 +33,21 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: "black"
   },
+  logo:{
+    width: 100,
+    length: '100%',
+    flex: 1,
+    flexDirection: 'column',
+    
+  },
   title: {
     color:'white',
     fontSize: 42,
     fontWeight: 'bold',
     textAlign: 'center',
     backgroundColor: 'rgba(0,0,0,0.5)',
-    marginBottom: 120
+    marginBottom: 120,
+    marginTop: 32
   },
   link: {
     color:'white',
