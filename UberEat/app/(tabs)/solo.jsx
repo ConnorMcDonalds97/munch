@@ -1,25 +1,19 @@
-import { View, Text, StyleSheet, Pressable, Image} from 'react-native'
+import { View, Text, StyleSheet, Pressable} from 'react-native'
 import React from 'react'
 import { Link } from "expo-router"
-import munchLogo from "@/assets/images/munchLogoWhite.png"
 
 const App = () => {
   return (
     <View style = {styles.container}>
-      <Image
-        style={styles.logo}
-        source={munchLogo}
-      ></Image>
-
       {/*title*/}
-     {/*<Text style={styles.title}>munch</Text>*/}
+      <Text style={styles.title}>solo</Text>  
 
       {/*"click here" button*/}
-      {/*<Link href="/tempPage" asChild> 
+      <Link href="/tempPage" asChild> 
         <Pressable style={styles.button}>
           <Text styles={styles.buttonText}>Click Here!</Text>
         </Pressable>
-      </Link>*/}
+      </Link>
 
     </View>
   )
@@ -33,27 +27,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: "black"
   },
-  logo:{
-    width: 'auto',
-    height: 'auto',
-    marginTop: 10,
-    marginLeft: 30,
-    marginRight: 30,
-    flex: 1,
-    resizeMode: 'contain',
-    justifyContent: 'center',
-    alignItems: 'center'
-    
-    
-  },
   title: {
     color:'white',
     fontSize: 42,
     fontWeight: 'bold',
     textAlign: 'center',
     backgroundColor: 'rgba(0,0,0,0.5)',
-    marginBottom: 120,
-    marginTop: 32
+    marginBottom: 120
   },
   link: {
     color:'white',
@@ -70,7 +50,7 @@ const styles = StyleSheet.create({
     padding: 4,
     width: 100,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   buttonText:{
     color: 'white',
