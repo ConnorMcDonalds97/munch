@@ -12,14 +12,14 @@ const App = () => {
       ></Image>
 
       {/*title*/}
-      <Text style={styles.title}>munch</Text>  
+     {/*<Text style={styles.title}>munch</Text>*/}
 
       {/*"click here" button*/}
-      <Link href="/tempPage" asChild> 
+      {/*<Link href="/tempPage" asChild> 
         <Pressable style={styles.button}>
           <Text styles={styles.buttonText}>Click Here!</Text>
         </Pressable>
-      </Link>
+      </Link>*/}
 
     </View>
   )
@@ -34,10 +34,16 @@ const styles = StyleSheet.create({
     backgroundColor: "black"
   },
   logo:{
-    width: 100,
-    length: '100%',
+    width: 'auto',
+    height: 'auto',
+    marginTop: 10,
+    marginLeft: 30,
+    marginRight: 30,
     flex: 1,
-    flexDirection: 'column',
+    resizeMode: 'contain',
+    justifyContent: 'center',
+    alignItems: 'center'
+    
     
   },
   title: {
@@ -64,7 +70,7 @@ const styles = StyleSheet.create({
     padding: 4,
     width: 100,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   buttonText:{
     color: 'white',
