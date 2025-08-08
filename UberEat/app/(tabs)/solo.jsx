@@ -1,5 +1,6 @@
-import { View, Text, TextInput, Pressable, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet, Aler, Image } from 'react-native';
 import React from 'react'
+import munchLogo from "@/assets/images/newMunchLogo.png"
 import { Link } from "expo-router"
 
 
@@ -47,7 +48,13 @@ const App = () => {
   return (
     <View style = {styles.container}>
       {/*title*/}
-      <Text style={styles.title}>solo</Text>  
+      <View style={styles.titleBar}>
+        <Image style={styles.titleBarLogo} source={munchLogo}/>
+        <Text style={styles.title}>solo</Text>  
+        <View style={{ width: 150}}/>
+      </View>
+
+      <View style={{ height: 300}}/>
 
       <TextInput
         style={styles.input}
@@ -81,21 +88,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#f37f6b',
     alignItems:'center',
   },
-  title: {
-    color:'white',
-    fontSize: 42,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: 30,
-    marginBottom: 120
+  titleBar:{
+    flexDirection:'row',
+    backgroundColor: '#f37f6b',
+    width: '100%',
+    height: 60,
+    alignItems: 'center',
+    justifyContent:'space-between',
+    paddingHorizontal: 10,
   },
-  link: {
-    color:'white',
+  titleBarLogo: {
+  width: 150,
+  height: 150,
+  resizeMode: 'contain',
+  },
+  title: {
+    color:'#f3e4e1',
     fontSize: 42,
     fontWeight: 'bold',
     textAlign: 'center',
-    padding: 4,
-    textDecoration: 'none'
+    textAlign: 'center'
   },
   button: {
     backgroundColor: 'white',
@@ -121,7 +133,8 @@ const styles = StyleSheet.create({
     width: 500,
     height: 25,
     margin: 12,
-    borderWidth: 1,
+    borderRadius: 16,
+    padding: 15
   }
 
 })

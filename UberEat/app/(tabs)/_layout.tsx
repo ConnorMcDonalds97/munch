@@ -23,7 +23,7 @@ export default function SwipeTabs(){
 
 
       tabBarIndicatorStyle: {
-        backgroundColor: '#9395D3', // underline colour
+        backgroundColor: '#f37f6b', // underline colour
         height: 3,
         borderRadius: 3,
       },
@@ -38,7 +38,7 @@ export default function SwipeTabs(){
         overflow: 'hidden',
       },
 
-      tabBarActiveTintColor: "#9395D3",
+      tabBarActiveTintColor: '#fd5f56',
       tabBarInactiveTintColor: '#000807',
       tabBarLabelStyle: {
         fontSize: 16,
