@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Pressable, Image} from 'react-native'
 import React from 'react'
 import { Link } from "expo-router"
-import munchLogo from "@/assets/images/munchLogoWhite.png"
+import munchLogo from "@/assets/images/newMunchLogo.png"
 
 const App = () => {
   return (
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: "black"
+    backgroundColor: '#f37f6b'
   },
   logo:{
     width: 'auto',
