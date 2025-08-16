@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Pressable, StyleSheet, Aler, Image } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet, Alert, Image, Dimensions } from 'react-native';
 import React from 'react'
 import munchLogo from "@/assets/images/newMunchLogo.png"
 import { Link } from "expo-router"
@@ -51,7 +51,7 @@ const App = () => {
       <View style={styles.titleBar}>
         <Image style={styles.titleBarLogo} source={munchLogo}/>
         <Text style={styles.title}>solo</Text>  
-        <View style={{ width: 150}}/>
+        <View style={{ width: "20%"}}/>
       </View>
 
       <View style={{ height: 300}}/>
@@ -69,6 +69,8 @@ const App = () => {
         value={userID}
         placeholder='Enter ID'
       />
+
+      <View style = {{ marginBottom: 15}}/>
 
       {/*"click here" button*/}
       <Pressable style={styles.button} onPress={handleSubmit}>
@@ -98,7 +100,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   titleBarLogo: {
-  width: 150,
+  width: "20%",
   height: 150,
   resizeMode: 'contain',
   },
@@ -130,11 +132,11 @@ const styles = StyleSheet.create({
     display: 'flex',
     backgroundColor: 'white',
     color: 'black',
-    width: 500,
+    width: "70%",
     height: 25,
     margin: 12,
     borderRadius: 16,
-    padding: 15
+    padding: 10
   }
 
 })
