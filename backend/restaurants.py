@@ -1,7 +1,12 @@
 import requests
 import time
+from dotenv import load_dotenv
+import os
 
-API_KEY = 'AIzaSyArldpZ-vepkhvx-n16-YxJLkX6rtilfKw'
+load_dotenv()
+
+API_KEY = os.getenv("GOOGLE_API_KEY")
+
 url = "https://places.googleapis.com/v1/places:searchNearby"
 headers = {
     "Content-Type": "application/json",
