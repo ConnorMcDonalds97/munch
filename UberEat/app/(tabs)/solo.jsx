@@ -1,7 +1,7 @@
 import { View, Text, TextInput, Pressable, StyleSheet, Alert, Image, Dimensions } from 'react-native';
 import React from 'react'
 import munchLogo from "@/assets/images/newMunchLogo.png"
-import { Link } from "expo-router"
+import { useRouter } from "expo-router"
 
 
 const App = () => {
@@ -10,40 +10,49 @@ const App = () => {
   const [username, setUsername] = React.useState('');
   const [userID, setUserID] = React.useState('');
   const [text, onChangeText] = React.useState('');
+  const router = useRouter()
+      Alert.alert('Error','Please fill in both fields')
 
   const handleSubmit = async () => {
     // input handling
     if (!username || !userID) {
-      Alert.alert('Please fill in both fields')
+      Alert.alert('Error','Please fill in both fields')
+      return;
+    }
+
+    if (username === 'kevin' && userID === '1'){
+      router.push("/game")
+    } else{
+      Alert.alert('Error','invalid credentials')
     }
 
   
 
-  // Prepare object to be sent to backend
-  const payload = {
-    username: username,
-    id: userID
-  }
+  //Prepare object to be sent to backend
+  // const payload = {
+  //   username: username,
+  //   id: userID
+  // }
 
-  try {
-    const response = await fetch('pretend I have an API right now', {
-      method: 'POST', // send data to server
-      headers: {
-        'Content-Type': 'application/JSON', 
-      },
-      body: JSON.stringify(payload),
-    });
+  // try {
+  //   const response = await fetch('pretend I have an API right now', {
+  //     method: 'POST', // send data to server
+  //     headers: {
+  //       'Content-Type': 'application/JSON', 
+  //     },
+  //     body: JSON.stringify(payload),
+  //   });
 
-    if (response.ok){
-      Alert.alert('Success')
-    } else {
-      Alert.alert('Error')
-    }
-    } catch (error) {
-      console.error('Error:', error),
-      Alert.alert('Error')
-    }
-};
+  //   if (response.ok){
+  //     Alert.alert('Success')
+  //   } else {
+  //     Alert.alert('Error')
+  //   }
+  //   } catch (error) {
+  //     console.error('Error:', error),
+  //     Alert.alert('Error')
+  //   }
+ };
 
   return (
     <View style = {styles.container}>
@@ -74,7 +83,7 @@ const App = () => {
 
       {/*"click here" button*/}
       <Pressable style={styles.button} onPress={handleSubmit}>
-        <Text styles={styles.buttonText}>Click Here!</Text>
+        <Text style={styles.buttonText}>Click Here!</Text>
       </Pressable>
 
     </View>
@@ -121,12 +130,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   buttonText:{
-    color: 'white',
-    fontSize: 36,
+    color: 'black',
+    fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'center',
     padding: 4,
-    textDecorationLine: 'none'
+    textDecorationLine: 'none',
   },
   input:{
     display: 'flex',
