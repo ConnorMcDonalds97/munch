@@ -1,7 +1,7 @@
-import { View, Text, TextInput, Pressable, StyleSheet, Aler, Image } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet, Alert, Image, Dimensions } from 'react-native';
 import React from 'react'
 import munchLogo from "@/assets/images/newMunchLogo.png"
-import { Link } from "expo-router"
+import { useRouter } from "expo-router"
 
 
 const App = () => {
@@ -10,40 +10,48 @@ const App = () => {
   const [username, setUsername] = React.useState('');
   const [userID, setUserID] = React.useState('');
   const [text, onChangeText] = React.useState('');
+  const router = useRouter()
 
   const handleSubmit = async () => {
     // input handling
     if (!username || !userID) {
-      Alert.alert('Please fill in both fields')
+      Alert.alert('Error','Please fill in both fields')
+      return;
+    }
+
+    if (username === 'kevin' && userID === '1'){
+      router.push("/game")
+    } else{
+      Alert.alert('Error','invalid credentials')
     }
 
   
 
-  // Prepare object to be sent to backend
-  const payload = {
-    username: username,
-    id: userID
-  }
+  //Prepare object to be sent to backend
+  // const payload = {
+  //   username: username,
+  //   id: userID
+  // }
 
-  try {
-    const response = await fetch('pretend I have an API right now', {
-      method: 'POST', // send data to server
-      headers: {
-        'Content-Type': 'application/JSON', 
-      },
-      body: JSON.stringify(payload),
-    });
+  // try {
+  //   const response = await fetch('pretend I have an API right now', {
+  //     method: 'POST', // send data to server
+  //     headers: {
+  //       'Content-Type': 'application/JSON', 
+  //     },
+  //     body: JSON.stringify(payload),
+  //   });
 
-    if (response.ok){
-      Alert.alert('Success')
-    } else {
-      Alert.alert('Error')
-    }
-    } catch (error) {
-      console.error('Error:', error),
-      Alert.alert('Error')
-    }
-};
+  //   if (response.ok){
+  //     Alert.alert('Success')
+  //   } else {
+  //     Alert.alert('Error')
+  //   }
+  //   } catch (error) {
+  //     console.error('Error:', error),
+  //     Alert.alert('Error')
+  //   }
+ };
 
   return (
     <View style = {styles.container}>
@@ -51,7 +59,7 @@ const App = () => {
       <View style={styles.titleBar}>
         <Image style={styles.titleBarLogo} source={munchLogo}/>
         <Text style={styles.title}>solo</Text>  
-        <View style={{ width: 150}}/>
+        <View style={{ width: "20%"}}/>
       </View>
 
       <View style={{ height: 300}}/>
@@ -61,6 +69,8 @@ const App = () => {
         onChangeText={setUsername}
         value={username}
         placeholder='Enter Username'
+        placeholderTextColor="black"
+
       />
 
       <TextInput
@@ -68,11 +78,14 @@ const App = () => {
         onChangeText={setUserID}
         value={userID}
         placeholder='Enter ID'
+        placeholderTextColor="black"
       />
+
+      <View style = {{ marginBottom: 15}}/>
 
       {/*"click here" button*/}
       <Pressable style={styles.button} onPress={handleSubmit}>
-        <Text styles={styles.buttonText}>Click Here!</Text>
+        <Text style={styles.buttonText}>Click Here!</Text>
       </Pressable>
 
     </View>
@@ -98,7 +111,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   titleBarLogo: {
-  width: 150,
+  width: "20%",
   height: 150,
   resizeMode: 'contain',
   },
@@ -119,22 +132,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   buttonText:{
-    color: 'white',
-    fontSize: 36,
+    color: 'black',
+    fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'center',
     padding: 4,
-    textDecorationLine: 'none'
+    textDecorationLine: 'none',
   },
   input:{
     display: 'flex',
     backgroundColor: 'white',
     color: 'black',
-    width: 500,
-    height: 25,
+    width: "70%",
+    height: "5%",
     margin: 12,
     borderRadius: 16,
-    padding: 15
+    padding: 10,
+    color: "black"
   }
 
 })
