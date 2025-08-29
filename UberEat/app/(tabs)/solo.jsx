@@ -11,7 +11,6 @@ const App = () => {
   const [userID, setUserID] = React.useState('');
   const [text, onChangeText] = React.useState('');
   const router = useRouter()
-      Alert.alert('Error','Please fill in both fields')
 
   const handleSubmit = async () => {
     // input handling
@@ -70,6 +69,8 @@ const App = () => {
         onChangeText={setUsername}
         value={username}
         placeholder='Enter Username'
+        placeholderTextColor="black"
+
       />
 
       <TextInput
@@ -77,6 +78,7 @@ const App = () => {
         onChangeText={setUserID}
         value={userID}
         placeholder='Enter ID'
+        placeholderTextColor="black"
       />
 
       <View style = {{ marginBottom: 15}}/>
@@ -142,10 +144,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     color: 'black',
     width: "70%",
-    height: 25,
+    height: "5%",
     margin: 12,
     borderRadius: 16,
-    padding: 10
+    padding: 10,
+    color: "black"
   }
 
 })
