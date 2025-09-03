@@ -33,7 +33,7 @@
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-native": "^0.79.4",
-    "react-native-deck-swiper": "^1.1.7",
+    "react-native-deck-swiper": "^2.0.19",
     "react-native-gesture-handler": "~2.24.0",
     "react-native-pager-view": "6.7.1",
     "react-native-reanimated": "~3.17.4",
