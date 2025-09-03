@@ -1,8 +1,12 @@
-import { View, Text, StyleSheet, Pressable, Image} from 'react-native'
+import { View, Text, StyleSheet, Pressable, Image, Dimensions} from 'react-native'
 import React from 'react'
 import { Link } from "expo-router"
 import Swiper from 'react-native-deck-swiper'
 import data from './data'
+import { LinearGradient } from 'expo-linear-gradient'
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window')
+
+
 
 const colors = {
   red: '#ec2379',
@@ -45,42 +49,69 @@ const App = () => {
         animateOverlayLabelsOpacity
         animateCardOpacity
         overlayLabels={{
-          left: {
-            title: 'Nope',
-            style: {
-              label:{
-                backgroundColor: colors.red,
-                color: colors.white,
-                fontSize: 24
-              },
-              wrapper:{
-                flexDirection: 'column',
-                alignItems: 'flex-end',
-                justifyContent: 'flex-start',
-                marginTop: 20,
-                marginLeft: -20,
-              }
-            }
-          },
-          right: {
-            title: 'yes',
-            style: {
-              label:{
-                backgroundColor: colors.red,
-                color: colors.white,
-                fontSize: 24
-              },
-              wrapper:{
-                flexDirection: 'column',
-                alignItems: 'flex-start',
-                justifyContent: 'flex-start',
-                marginTop: 20,
-                marginLeft: 20,
-              }
-            }
-          }
+  left: {
+    element: (
+      <LinearGradient
+        colors={['rgba(255,0,0,1)', 'rgba(255,0,0,0.5)']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={{
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: 8,
         }}
-      />
+      >
+        <Text style={{ color: 'white', fontSize: 48, fontWeight: 'bold' }}>
+          NOPE
+        </Text>
+      </LinearGradient>
+    ),
+    style: {
+      wrapper: {
+        width: '30%',
+        height: '50%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center', // center overlay on card
+      },
+    },
+  },
+  right: {
+    element: (
+      <LinearGradient
+        colors={['rgba(0,255,0,1)', 'rgba(0,255,0,0.5)']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={{
+          width: '100%',
+          height: '100%',
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: 8,
+        }}
+      >
+        <Text style={{ color: 'white', fontSize: 48, fontWeight: 'bold' }}>
+          YES
+        </Text>
+      </LinearGradient>
+    ),
+    style: {
+      wrapper: {
+        width: '30%',
+        height: '50%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+      },
+    },
+  },
+}}
+
+
+
+/>
       <View style={styles.bottomContainer}>
           <CardDetails index={index}/>
       </View>
@@ -98,7 +129,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   card: {
-    flex: 0.45,
+    width: "30%",
+    height: "50%",
     borderRadius: 8,
     shadowRadius: 25,
     shadowColor: "black",
@@ -106,7 +138,8 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 0},
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+    alignSelf: 'center'
   },
   cardImage: {
     width: 160,
