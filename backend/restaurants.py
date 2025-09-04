@@ -2,10 +2,11 @@ import requests
 import time
 from dotenv import load_dotenv
 import os
+import pprint
 
 load_dotenv()
 
-API_KEY = os.getenv("GOOGLE_API_KEY")
+API_KEY = os.getenv("GOOGLE_API_KEY_")
 
 url = "https://places.googleapis.com/v1/places:searchNearby"
 headers = {
@@ -16,6 +17,7 @@ headers = {
 
 
 def fetch_places_new(location, radius=3000, included_types=["restaurant"]):
+    print("here")
     all_places = []
     body = {
         "includedTypes": included_types,
@@ -34,6 +36,8 @@ def fetch_places_new(location, radius=3000, included_types=["restaurant"]):
     while True:
         response = requests.post(url, headers=headers, json=body)
         data = response.json()
+        print("here")
+        print(data)
         places = data.get("places", [])
         all_places.extend(places)
         print(data)
@@ -47,7 +51,7 @@ def fetch_places_new(location, radius=3000, included_types=["restaurant"]):
     
     return all_places
 def fetch_places_old(location, radius=3000):
-    API_KEY = 'AIzaSyArldpZ-vepkhvx-n16-YxJLkX6rtilfKw'
+    API_KEY = os.getenv("GOOGLE_API_KEY_")
     url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
     params = {
         "location": location,
@@ -72,10 +76,12 @@ def fetch_places_old(location, radius=3000):
         }
     return all_places
 
+
 location = (53.618278, -113.446093)
-restaurants = fetch_places_old("53.618278,-113.446093", radius=10000)
-
+restaurants = fetch_places_old("53.600537,-113.496013", radius=200)
+pprint.pp(restaurants[0])
+'''
 print("Total Restaurants Found: ", len(restaurants))
-
 for place in restaurants:
     print(place["name"], place["geometry"]["location"])
+'''
