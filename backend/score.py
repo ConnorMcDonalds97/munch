@@ -58,7 +58,7 @@ def reorder(restaurants, indexes):
     return new_list
 
 
-def fetch_restaunrants(user_location = (-113.5319,53.52), radius = 5000):
+def fetch_restaurants(user_location = (-113.5319,53.52), radius = 5000):
     restaurants = select_restaurants(user_location, radius=radius)
     probs = softmax(restaurants)
     indexes = [i for i in range(len(restaurants))]
@@ -71,4 +71,4 @@ def fetch_restaunrants(user_location = (-113.5319,53.52), radius = 5000):
     
 
 if __name__ == "__main__":
-    print(fetch_restaunrants())
+    print(fetch_restaurants())
