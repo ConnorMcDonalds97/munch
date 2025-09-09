@@ -9,7 +9,7 @@ async def fake_user(name, room):
         msg = await ws.recv()
         msg = json.loads(msg)
         data = []
-
+        
         while True:
             if msg and msg["Header"] == "List":
                 data = msg["Body"]['restaraunts']

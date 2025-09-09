@@ -6,7 +6,7 @@ app = FastAPI()
 rooms = {} #{room_id : {users : [webSocket, webSocket, ...], choices : { rest1 : []}}}
 
 rests = ["Pizza Place", "Sushi Bar", "Burger Joint"]
-restaurants = json.dumps({"Header":"List", "Body":{"restaraunts":rests}})
+restaurants = json.dumps({"Header":"List", "Body":{"restaurants":rests}})
 
 @app.websocket("/ws/{room_id}")
 async def websocket_endpoint(websocket: WebSocket, room_id: str):
@@ -20,7 +20,7 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str):
         await websocket.send_text(restaurants)
         #handle when online
         while True:
-            response = await websocket.receive_text
+            response = await websocket.receive_text()
             response = json.loads(response)
             if response["Header"] == "Swipe" and response["Body"][1] == "r":
                 rest = response["Body"][0]

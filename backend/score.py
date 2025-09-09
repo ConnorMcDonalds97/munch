@@ -4,12 +4,13 @@ import numpy as np
 import os
 from dotenv import load_dotenv
 import math
-
+import json
+import pprint
 
 DISTANCE_LIMIT = 5000 #meters
 T = 0.2 #temperature for softmax
 
-def select_restaurants(location_center, radius=10000):
+def select_restaurants(location_center, radius=5000):
     load_dotenv()
     conn = psycopg2.connect(
         dbname=os.getenv("DB_NAME"),
@@ -47,20 +48,27 @@ def softmax(restaurants):
     sum_scores = sum(scores)
     probabilities = [s/sum_scores for s in scores]
     return probabilities
+def reorder(restaurants, indexes):
+    new_list = np.copy(restaurants)
+    
+    j = len(restaurants)-1
+    for i in indexes:
+        new_list[j] = restaurants[i]
+        j -= 1
+    return new_list
 
-def main():
-    user_location = (-113.5319,53.52)
-    restaurants = select_restaurants(user_location, radius=5000)
+
+def fetch_restaunrants(user_location = (-113.5319,53.52), radius = 5000):
+    restaurants = select_restaurants(user_location, radius=radius)
     probs = softmax(restaurants)
     indexes = [i for i in range(len(restaurants))]
-    reorder = np.random.choice(indexes, size=len(restaurants), replace=False, p=probs)
     
-    counter = 0
-    for i in reorder:
-        print(f"Restaurant: {restaurants[i][0]}, Rating: {restaurants[i][3]}, Number of Ratings: {restaurants[i][4]}, Distance (m): {restaurants[i][7]}")
-        counter += 1
-        if counter >= 20:
-            break
+    new_order = np.random.choice(indexes, size=len(restaurants), replace=False, p=probs)
+    
+    restaurants = reorder(restaurants, new_order)
+
+    return restaurants.tolist()
+    
 
 if __name__ == "__main__":
-    main()
+    print(fetch_restaunrants())
