@@ -8,8 +8,6 @@ import data from './data'
 import { LinearGradient } from 'expo-linear-gradient'
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window')
 
-
-
 const colors = {
   red: '#ec2379',
   blue: '#0070ff',
@@ -35,6 +33,14 @@ const CardDetails = ({index}) => (
 
 const App = () => {
   const [index, setIndex] = React.useState(0)
+
+  // swipeHistory is an array that stores a {restaurant, direction} object for each swipe,
+  // In Python terms its an array of dictionaries
+  // Looks like this
+  // [
+  //    { restuarant:info , direction:left/right },
+  //    ...
+  // ]
   const [swipeHistory, setSwipeHistory] = React.useState([])
 
   // Log swipe history whenever it changes
@@ -43,6 +49,7 @@ const App = () => {
   }, [swipeHistory]);
 
   // Helper to record swipe direction and restaurant
+  // 
   const recordSwipe = (direction) => {
     const restaurant = data[index];
     if (restaurant) {
@@ -60,9 +67,6 @@ const App = () => {
     setIndex(index + 1);
   }
 
-  // Optionally, handle up/down swipes if needed
-  // const onSwipedTop = () => { ... }
-  // const onSwipedBottom = () => { ... }
   return (
       <View style={[styles.container, {paddingTop: Constants.statusBarHeight}]}> 
         <StatusBar style="light" translucent backgroundColor="transparent" />
