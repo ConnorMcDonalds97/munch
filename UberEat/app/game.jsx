@@ -1,4 +1,6 @@
 import { View, Text, StyleSheet, Pressable, Image, Dimensions} from 'react-native'
+import { StatusBar } from 'expo-status-bar'
+import Constants from 'expo-constants'
 import React from 'react'
 import { Link } from "expo-router"
 import Swiper from 'react-native-deck-swiper'
@@ -24,7 +26,9 @@ const Card = ({card}) => (
 
 const CardDetails = ({index}) => (
   <View>
-    <Text style={[styles.title]}>data[index].name</Text>
+    <Text style={[styles.title]}>
+      {data[index]?.name ? data[index].name : 'No more restaurants'}
+    </Text>
   </View>
 
 )
@@ -35,85 +39,89 @@ const App = () => {
     setIndex(index+1)
   }
   return (
-    <View style = {styles.container}>
-      <Swiper
-        cards={data}
-        cardIndex={index}
-        renderCard={card => <Card card={card}/>}
-        onSwiped={onSwiped}
-        stackSize={5}
-        stackScale={10}
-        stackSeparation={14}
-        disableTopSwipe
-        disableBottomSwipe
-        animateOverlayLabelsOpacity
-        animateCardOpacity
-        overlayLabels={{
-  left: {
-    element: (
-      <LinearGradient
-        colors={['rgba(255,0,0,1)', 'rgba(255,0,0,0.5)']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={{
-          width: '100%',
-          height: '100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 8,
-        }}
-      >
-        <Text style={{ color: 'white', fontSize: 48, fontWeight: 'bold' }}>
-          NOPE
-        </Text>
-      </LinearGradient>
-    ),
-    style: {
-      wrapper: {
-        width: '30%',
-        height: '50%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignSelf: 'center', // center overlay on card
-      },
-    },
-  },
-  right: {
-    element: (
-      <LinearGradient
-        colors={['rgba(0,255,0,1)', 'rgba(0,255,0,0.5)']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={{
-          width: '100%',
-          height: '100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 8,
-        }}
-      >
-        <Text style={{ color: 'white', fontSize: 48, fontWeight: 'bold' }}>
-          YES
-        </Text>
-      </LinearGradient>
-    ),
-    style: {
-      wrapper: {
-        width: '30%',
-        height: '50%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignSelf: 'center',
-      },
-    },
-  },
-}}
+    <View style={[styles.container, {paddingTop: Constants.statusBarHeight}]}> 
+    
+      <StatusBar style="light" translucent backgroundColor="transparent" />
 
-
-
-/>
       <View style={styles.bottomContainer}>
-          <CardDetails index={index}/>
+        <CardDetails index={index}/>
+      </View>
+
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Swiper
+          cards={data}
+          cardIndex={index}
+          renderCard={card => <Card card={card}/>}
+          onSwiped={onSwiped}
+          backgroundColor='#f37f6b'
+          stackSize={5}
+          stackScale={10}
+          stackSeparation={14}
+          disableTopSwipe
+          disableBottomSwipe
+          animateOverlayLabelsOpacity
+          animateCardOpacity
+          overlayLabels={{
+            left: {
+              element: (
+                <LinearGradient
+                  colors={['rgba(255,0,0,1)', 'rgba(255,0,0,0.5)']}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: 8,
+                  }}
+                >
+                  <Text style={{ color: 'white', fontSize: 48, fontWeight: 'bold' }}>
+                    NOPE
+                  </Text>
+                </LinearGradient>
+              ),
+              style: {
+                wrapper: {
+                  width: Math.max(SCREEN_WIDTH * 0.8, 280),
+                  height: Math.max(SCREEN_HEIGHT * 0.45, 220),
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  alignSelf: 'center',
+                },
+              },
+            },
+            right: {
+              element: (
+                <LinearGradient
+                  colors={['rgba(0,255,0,1)', 'rgba(0,255,0,0.5)']}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: 8,
+                  }}
+                >
+                  <Text style={{ color: 'white', fontSize: 48, fontWeight: 'bold' }}>
+                    YES
+                  </Text>
+                </LinearGradient>
+              ),
+              style: {
+                wrapper: {
+                  width: Math.max(SCREEN_WIDTH * 0.8, 280),
+                  height: Math.max(SCREEN_HEIGHT * 0.45, 220),
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  alignSelf: 'center',
+                },
+              },
+            },
+          }}
+        />
       </View>
     </View>
   )
@@ -124,14 +132,15 @@ export default App
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
-    alignItems: 'center',
-    justifyContent: 'center'
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'stretch',
+    backgroundColor:"white"
   },
   card: {
-    width: "30%",
-    height: "50%",
-    borderRadius: 8,
+    width: Math.max(SCREEN_WIDTH * 0.8, 280), // 80% of screen or at least 280px
+    height: Math.max(SCREEN_HEIGHT * 0.45, 220), // 45% of screen or at least 220px
+    borderRadius: 16,
     shadowRadius: 25,
     shadowColor: "black",
     shadowOpacity: 0.08,
@@ -139,16 +148,30 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: "#fff",
-    alignSelf: 'center'
+    alignSelf: 'center',
+    overflow: 'hidden', // ensure image doesn't overflow
   },
   cardImage: {
-    width: 160,
-    flex: 1,
-    resizeMode: 'contain'
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain',
   },
   bottomContainer: {
-    bottomContainer: 0.5
+    width: '100%',
+    alignItems: 'center',
+    paddingTop: 16,
+    paddingBottom: 8,
+    backgroundColor: "#f37f6b"
   },
   CardDetails: {},
   text: {},
+  title: {
+    color: '#fff',
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    backgroundColor: 'transparent',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+  },
 })
