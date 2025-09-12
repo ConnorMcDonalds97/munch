@@ -146,7 +146,6 @@ def upload_area(coords, step = 1.0, radius = 1000):
         
 if __name__ == "__main__":
 
-    point = ((53.423932,-113.488439),(53.432932,-113.470456)) 
-    upload_area(point, step=0.2, radius=200)
+    upload_area(EDMONTON, step=0.2, radius=200)
     
     #upload_area(EDMONTON)

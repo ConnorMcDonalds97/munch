@@ -4,8 +4,6 @@ import numpy as np
 import os
 from dotenv import load_dotenv
 import math
-import json
-import pprint
 
 DISTANCE_LIMIT = 5000 #meters
 T = 0.2 #temperature for softmax

@@ -15,7 +15,7 @@ headers = {
     "X-Goog-FieldMask": "places.id,places.displayName,places.location"
 }
 
-
+#uses the new places api -> not as useful because it does not allow us to search multiple pages -> max 20 restaurants
 def fetch_places_new(location, radius=3000, included_types=["restaurant"]):
     print("here")
     all_places = []
@@ -79,7 +79,6 @@ def fetch_places_old(location, radius=3000):
 
 location = (53.618278, -113.446093)
 restaurants = fetch_places_old("53.600537,-113.496013", radius=200)
-pprint.pp(restaurants[0])
 '''
 print("Total Restaurants Found: ", len(restaurants))
 for place in restaurants:
