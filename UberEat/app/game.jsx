@@ -35,95 +35,120 @@ const CardDetails = ({index}) => (
 
 const App = () => {
   const [index, setIndex] = React.useState(0)
-  const onSwiped = () => {
-    setIndex(index+1)
+  const [swipeHistory, setSwipeHistory] = React.useState([])
+
+  // Log swipe history whenever it changes
+  React.useEffect(() => {
+    console.log('Swipe History:', swipeHistory);
+  }, [swipeHistory]);
+
+  // Helper to record swipe direction and restaurant
+  const recordSwipe = (direction) => {
+    const restaurant = data[index];
+    if (restaurant) {
+      setSwipeHistory(prev => [...prev, { restaurant, direction }]);
+    }
   }
+
+  const onSwipedLeft = () => {
+    recordSwipe('left');
+    setIndex(index + 1);
+  }
+
+  const onSwipedRight = () => {
+    recordSwipe('right');
+    setIndex(index + 1);
+  }
+
+  // Optionally, handle up/down swipes if needed
+  // const onSwipedTop = () => { ... }
+  // const onSwipedBottom = () => { ... }
   return (
-    <View style={[styles.container, {paddingTop: Constants.statusBarHeight}]}> 
-    
-      <StatusBar style="light" translucent backgroundColor="transparent" />
+      <View style={[styles.container, {paddingTop: Constants.statusBarHeight}]}> 
+        <StatusBar style="light" translucent backgroundColor="transparent" />
 
-      <View style={styles.bottomContainer}>
-        <CardDetails index={index}/>
-      </View>
+        <View style={styles.bottomContainer}>
+          <CardDetails index={index}/>
+        </View>
 
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Swiper
-          cards={data}
-          cardIndex={index}
-          renderCard={card => <Card card={card}/>}
-          onSwiped={onSwiped}
-          backgroundColor='#f37f6b'
-          stackSize={5}
-          stackScale={10}
-          stackSeparation={14}
-          disableTopSwipe
-          disableBottomSwipe
-          animateOverlayLabelsOpacity
-          animateCardOpacity
-          overlayLabels={{
-            left: {
-              element: (
-                <LinearGradient
-                  colors={['rgba(255,0,0,1)', 'rgba(255,0,0,0.5)']}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 1 }}
-                  style={{
-                    width: '100%',
-                    height: '100%',
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Swiper
+            cards={data}
+            cardIndex={index}
+            renderCard={card => <Card card={card}/>}
+            onSwipedLeft={onSwipedLeft}
+            onSwipedRight={onSwipedRight}
+            backgroundColor='#f37f6b'
+            stackSize={5}
+            stackScale={10}
+            stackSeparation={14}
+            disableTopSwipe
+            disableBottomSwipe
+            animateOverlayLabelsOpacity
+            animateCardOpacity
+            overlayLabels={{
+              left: {
+                element: (
+                  <LinearGradient
+                    colors={['rgba(255,0,0,1)', 'rgba(255,0,0,0.5)']}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      borderRadius: 8,
+                    }}
+                  >
+                    <Text style={{ color: 'white', fontSize: 48, fontWeight: 'bold' }}>
+                      NOPE
+                    </Text>
+                  </LinearGradient>
+                ),
+                style: {
+                  wrapper: {
+                    width: Math.max(SCREEN_WIDTH * 0.8, 280),
+                    height: Math.max(SCREEN_HEIGHT * 0.45, 220),
                     justifyContent: 'center',
                     alignItems: 'center',
-                    borderRadius: 8,
-                  }}
-                >
-                  <Text style={{ color: 'white', fontSize: 48, fontWeight: 'bold' }}>
-                    NOPE
-                  </Text>
-                </LinearGradient>
-              ),
-              style: {
-                wrapper: {
-                  width: Math.max(SCREEN_WIDTH * 0.8, 280),
-                  height: Math.max(SCREEN_HEIGHT * 0.45, 220),
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  alignSelf: 'center',
+                    alignSelf: 'center',
+                  },
                 },
               },
-            },
-            right: {
-              element: (
-                <LinearGradient
-                  colors={['rgba(0,255,0,1)', 'rgba(0,255,0,0.5)']}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 1 }}
-                  style={{
-                    width: '100%',
-                    height: '100%',
+              right: {
+                element: (
+                  <LinearGradient
+                    colors={['rgba(0,255,0,1)', 'rgba(0,255,0,0.5)']}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      borderRadius: 8,
+                    }}
+                  >
+                    <Text style={{ color: 'white', fontSize: 48, fontWeight: 'bold' }}>
+                      YES
+                    </Text>
+                  </LinearGradient>
+                ),
+                style: {
+                  wrapper: {
+                    width: Math.max(SCREEN_WIDTH * 0.8, 280),
+                    height: Math.max(SCREEN_HEIGHT * 0.45, 220),
                     justifyContent: 'center',
                     alignItems: 'center',
-                    borderRadius: 8,
-                  }}
-                >
-                  <Text style={{ color: 'white', fontSize: 48, fontWeight: 'bold' }}>
-                    YES
-                  </Text>
-                </LinearGradient>
-              ),
-              style: {
-                wrapper: {
-                  width: Math.max(SCREEN_WIDTH * 0.8, 280),
-                  height: Math.max(SCREEN_HEIGHT * 0.45, 220),
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  alignSelf: 'center',
+                    alignSelf: 'center',
+                  },
                 },
               },
-            },
-          }}
-        />
+            }}
+          />
+        </View>
       </View>
-    </View>
   )
 }
 
